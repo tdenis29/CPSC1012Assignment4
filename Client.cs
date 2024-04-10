@@ -39,7 +39,7 @@ public class Client {
         }
         set{
             if (string.IsNullOrWhiteSpace(value))
-					throw new ArgumentNullException("Tag is required. Must not be empty or blank.");
+				throw new ArgumentNullException("Tag is required. Must not be empty or blank.");
             firstname = value;
         }
     }
