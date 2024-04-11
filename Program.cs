@@ -56,22 +56,21 @@ class Program{
 	}
     //change from void to INT at partb 
 
-     static void EnterClient(//double[] sales, string[] dates
-     ){
+     static Client EnterClient(//int[] sales, string[] dates
+      ){
        
       
-        double userClientWeight = 0;
-        double userClientHeight = 0;
-        string userClientFirstName = "";
-        string userClientLastName = "";
+        int userClientWeight = 0;
+        int userClientHeight = 0;
+        string userClientFirstName;
+        string userClientLastName;
         bool firstNameGood = false;
         bool lastNameGood = false;
+        bool userClientWeightGood = false;
+        bool userClientHeightGood = false;
          //uncomment this when doing partB
         //int count = 0;
 
-
-        // get firstname first
-        //Console.Write("Enter Client First Name: ");
         do{
             userClientFirstName = Prompt("Enter Client First Name: ");
             if(!string.IsNullOrEmpty(userClientFirstName)){
@@ -86,29 +85,42 @@ class Program{
                 lastNameGood = true;
             }
         } while(!lastNameGood);
-        //END GET MONTH
-        
-    //     Console.Write("Please enter year. (eg. YYYY): ");
+       
 
-    //     do{
-    //         try{
-    //             userYear = Console.ReadLine();
-    //             if(!Regex.IsMatch(userYear, yearTest)){
-    //                 throw new FormatException("Please enter a year between 1900 and 2100");
-    //             } else {
-    //                 Console.WriteLine($"{userYear} is confirmed.");
-    //                 break;
-    //             }
-    //         } catch(FormatException ex){
-    //             Console.WriteLine(ex.Message);
-    //         }
-    //     } while(userYear != "0");
+       //GET Weight
+        do{
+            Console.Write("Please enter the clients weight in pounds: ");
+            try{
+                userClientWeight = Promptint();
+                userClientWeightGood = true;
+            } catch(FormatException ex){
+                Console.WriteLine(ex.Message);
+            }
+        } while(!userClientWeightGood);
 
-        
+        ///GET CLient Height in inches
+        do{
+            Console.Write("Please enter the clients height in inches: ");
+            try{
+                userClientHeight = Promptint(); 
+                userClientHeightGood = true;
+            } catch(FormatException ex){
+                Console.WriteLine(ex.Message);
+            }
+        } while(!userClientHeightGood);
+
+       //PartA just instantiate a new client object with provided values 
+       Client client1 = new Client(userClientFirstName, userClientLastName, userClientWeight, userClientHeight);
+       Console.WriteLine("");
+       if(client1 != null){
+        Console.WriteLine("Client succesfully created.");
+       }
+       return client1;
+
     //     //add values into array here 
     //     for(int i = 0; i <= 30; i++){
-    //         Console.WriteLine($"Please enter daily sales for day {i + 1} as a double value.");
-    //         dailySales = PromptDouble();
+    //         Console.WriteLine($"Please enter daily sales for day {i + 1} as a int value.");
+    //         dailySales = Promptint();
     //         if(dailySales == -1){
     //             break;
     //         } else {
@@ -121,19 +133,19 @@ class Program{
     //     }
     // return count;    
         }
-	static double PromptDouble(){
-        double userDouble = 0.0;
-        double min = 0;
-        double max = 100;
+	static int Promptint(){
+        int userint = 0;
+        int min = 10;
+        int max = 1000;
 
         bool exit = false;
 
         do{
             try{
-                userDouble = double.Parse(Console.ReadLine());
-                if(userDouble >= min && userDouble <= max){
+                userint = int.Parse(Console.ReadLine());
+                if(userint >= min && userint <= max){
                     exit = true;
-                } else if( userDouble == -1){
+                } else if( userint == -1){
                     exit = true;
                 } 
                 else{
@@ -144,8 +156,18 @@ class Program{
             }
         }while(!exit);
 
-        return userDouble;
+        return userint;
     } 
+
+    static void DisplayBMIInfo(Client currentClient){
+     
+        double currentClientBMI = currentClient.BmiScore();
+        Console.WriteLine("Client Name: " + $"{currentClient.LastName}" + "," + $"{currentClient.FirstName}");
+        Console.WriteLine("Client BMI Score: " + $"{currentClientBMI:n2}");
+        Console.WriteLine("Client BMI Status: " + $"{currentClient.BmiStatus(currentClientBMI)}" );
+    }
+
+    
 
     static void Main(string[] args){
 
@@ -155,6 +177,7 @@ class Program{
         bool displayEditMenu;
         bool proceed;
         bool quit;
+        Client currentClient = null;
         //REMEBER TO RE-IMPLEMENT COUNT
         DisplayMainMenu();
 
@@ -171,33 +194,35 @@ class Program{
 
                     proceed = NewEntryDisclaimer();
 
-                    if (proceed)
-                    {
+                    if (proceed){
                         // TODO: uncomment the following and call the Enter New Client
                         //for PArtB downthere
                         //count = EnterClient();
-
-                        EnterClient();
-                        //Console.WriteLine();
                         //Console.WriteLine($"Entries completed. {count} records in temporary memory.");
                         //Console.WriteLine();
+                        currentClient = EnterClient();
                     }
-                    else
-                    {
+                    else{
                         Console.WriteLine("Cancelling new data entry. Returning to MAIN MENU.");
                     }
+
                     break;
-                
-                case "S": //[S]How Client BMI Info
+                case "S" : //[S]How Client BMI Info
                     // filename = Prompt("Enter name of file to load: ");
                     // // TODO: uncomment the following and call the ShowClientBMIInfo method below
+                    if(currentClient != null){
+                        DisplayBMIInfo(currentClient);
+                    }
+                   
                     // count = LoadSalesFile(filename, sales, dates);
                     // Console.WriteLine($"{count} records were loaded.");
                     // Console.WriteLine();
-                    // break;
+                    break;
                 case "E": //[E]dit Client BMI Info
                     //will need the below few lines for part b
-                    // if (count == 0)
+                    // if (currentClient != null){
+
+                    // }
                     // {
                     //     Console.WriteLine("Sorry, LOAD data or enter NEW data before ANALYSIS.");
                     // }
@@ -206,7 +231,7 @@ class Program{
                         displayEditMenu = true;
                         while (displayEditMenu)
                         {
-                            // TODO: call the DisplayAnalysisMenu here
+                            // TODO: call the DisplayEditMenu here
 							DisplayEditMenu();
 
                             editMenuChoice = Prompt("What would you like to Edit?").ToUpper();
@@ -215,22 +240,26 @@ class Program{
                             switch (editMenuChoice)
                             {
                                 case "F": //[F]irst Name
-                                          // TODO: uncomment the following and call Get FirstName
+                                          // TODO: uncomment the following and call Set FirstName
+                                          currentClient.FirstName = Prompt("Enter e new firstname.");
                                     break;
-                                case "L": //[H]ighest Sales
+                                case "L": //[L]ast Name
                                           // TODO: uncomment the following and call the Largest method below
+                                          currentClient.LastName = Prompt("Enter a new lastname.");
                                   
                                     break;
-                                case "W": //[L]owest Sales
+                                case "W": //[W]eight 
                                           // TODO: uncomment the following and call the Smallest method below
+                                          currentClient.ClientWeight = int.Parse(Prompt("Enter a new weight in pounds."));
                                         //   smallest = LowestSales(sales, count);
                                         //   month = dates[0].Substring(0, 3);
                                         //   year = dates[0].Substring(7, 4);
                                         //   Console.WriteLine($"The smallest sales for {month} {year} is: {smallest:C}");
                                         //   Console.WriteLine();
                                     break;
-                                case "H": //[G]raph Sales
+                                case "H": //[H]eight
                                           // TODO: call the DisplayChart method below
+                                          currentClient.ClientHeight = int.Parse(Prompt("Enter a new height in inches"));
                                             // DisplaySalesChart(sales, dates, count);
                                             // Prompt("Press <enter> to continue...");
                                     break;

@@ -25,7 +25,7 @@ public class Client {
         ClientHeight = 0;
     }
 
-    public Client(string firstname, string lastname, int clientWeight, int clientHeight)
+    public Client(string firstname, string lastname, int clientWeight,int clientHeight)
     {
         FirstName = firstname;
         LastName = lastname;
@@ -59,7 +59,7 @@ public class Client {
         get{
             return clientWeight;
         }
-        private set{
+        set{
             if (value <= 0){
                 throw new FormatException("Cant be null, or 0 give me five or something");
             } else{
@@ -82,7 +82,7 @@ public class Client {
     }
     //END FIELDS AND PROPERTIES MEMEBER METHODS BELOW
     // Read Only Fully Implemented Properties
-    //A read-only property named BmiScore that will return as a double the BMI score for the client
+    //A read-only property named BmiScore that will return as a int the BMI score for the client
     // Formula: weight / height2 x 703
     // The formula for BMI is weight in pounds (lbs) divided by inches squared (in2). The total is then multiplied by 703
     // Where height is in inches and weight is in pounds.
@@ -93,7 +93,8 @@ public class Client {
     // 25.0 - 39.9 	Overweight
     // >= 40 	Obese
     public double BmiScore(){
-        return clientWeight / (clientHeight * clientHeight) * 703;
+        double bmi = (double)clientWeight / (clientHeight * clientHeight) * 703;
+        return bmi;
     } 
     //A read-only property named BmiStatus that will return as a string the BMI status for the corresponding BMI score
     public string BmiStatus(double bmi){

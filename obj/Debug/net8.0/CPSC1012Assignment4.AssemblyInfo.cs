@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CPSC1012Assignment4")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fb74f46532653e9fa2c8faf79f3cc20c580e2823")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+005cc519e87a5f706e83f9d7fcef840168b68fb6")]
 [assembly: System.Reflection.AssemblyProductAttribute("CPSC1012Assignment4")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CPSC1012Assignment4")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
