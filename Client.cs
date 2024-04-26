@@ -19,18 +19,18 @@ public class Client {
     
     public Client()
     {
-        FirstName = "XXXX";
-        LastName = "YYYY";
+        firstname = "XXXX";
+        lastname = "YYYY";
         ClientWeight = 0;
         ClientHeight = 0;
     }
 
-    public Client(string firstname, string lastname, int clientWeight,int clientHeight)
+    public Client(string FirstName, string LastName, int ClientWeight,int ClientHeight)
     {
-        FirstName = firstname;
-        LastName = lastname;
-        ClientWeight = clientWeight;
-        ClientHeight = clientHeight;
+        firstname = FirstName;
+        lastname = LastName;
+        clientWeight = ClientWeight;
+        clientHeight = ClientHeight;
     }
  
     public string FirstName{
@@ -38,8 +38,6 @@ public class Client {
             return firstname;
         }
         set{
-            if (string.IsNullOrWhiteSpace(value))
-				throw new ArgumentNullException("Tag is required. Must not be empty or blank.");
             firstname = value;
         }
     }
@@ -48,11 +46,7 @@ public class Client {
             return lastname;
         }
         set{
-            if (string.IsNullOrWhiteSpace(value))   {
-                throw new ArgumentNullException("Lastname cant be empty or null");
-            } else{
-                lastname = value;
-            }
+            lastname = value;
         }            
     }
     public int ClientWeight{
@@ -60,12 +54,7 @@ public class Client {
             return clientWeight;
         }
         set{
-            if (value <= 0){
-                throw new FormatException("Cant be null, or 0 give me five or something");
-            } else{
-                clientWeight = value;
-            }
-    
+            clientWeight = value;
         }
     }
     public int ClientHeight {
@@ -73,11 +62,7 @@ public class Client {
             return clientHeight;
         }
         set{
-            if (value <= 0){
-            throw new FormatException("Cant be null, or 0 give me five or something");
-            } else {
-                clientHeight = value;
-            }
+            clientHeight = value;
         }   
     }
     //END FIELDS AND PROPERTIES MEMEBER METHODS BELOW

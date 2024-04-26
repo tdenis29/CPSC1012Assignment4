@@ -161,7 +161,7 @@ class Program{
         bool displayEditMenu;
         bool proceed;
         bool quit;
-        Client currentClient = null;
+        Client currentClient = new Client();
         
         DisplayMainMenu();
 
@@ -169,9 +169,6 @@ class Program{
         {
             mainMenuChoice = Prompt("Enter MAIN MENU option ('D' to display menu): ").ToUpper();
             Console.WriteLine();
-    
-
-         
             switch (mainMenuChoice)
             {
                 case "N": //[N]ew Client Entry
@@ -180,10 +177,6 @@ class Program{
 
                     if (proceed){
                         // TODO: uncomment the following and call the Enter New Client
-                        //for PArtB downthere
-                        //count = EnterClient();
-                        //Console.WriteLine($"Entries completed. {count} records in temporary memory.");
-                        //Console.WriteLine();
                         currentClient = EnterClient();
                     }
                     else{
@@ -192,25 +185,14 @@ class Program{
 
                     break;
                 case "S" : //[S]How Client BMI Info
-                    // filename = Prompt("Enter name of file to load: ");
-                    // // TODO: uncomment the following and call the ShowClientBMIInfo method below
+             
                     if(currentClient != null){
                         DisplayBMIInfo(currentClient);
                     }
-                   
-                    // count = LoadSalesFile(filename, sales, dates);
-                    // Console.WriteLine($"{count} records were loaded.");
-                    // Console.WriteLine();
+        
                     break;
                 case "E": //[E]dit Client BMI Info
-                    //will need the below few lines for part b
-                    // if (currentClient != null){
-
-                    // }
-                    // {
-                    //     Console.WriteLine("Sorry, LOAD data or enter NEW data before ANALYSIS.");
-                    // }
-                    //else
+             
                     {
                         displayEditMenu = true;
                         while (displayEditMenu)
@@ -218,31 +200,31 @@ class Program{
                             // TODO: call the DisplayEditMenu here
 							DisplayEditMenu();
 
-                            editMenuChoice = Prompt("What would you like to Edit?").ToUpper();
+                            editMenuChoice = Prompt("What would you like to Edit? ").ToUpper();
                             Console.WriteLine();
                             Console.WriteLine($"{editMenuChoice}");
                             switch (editMenuChoice)
                             {
                                 case "F": //[F]irst Name
-                                          currentClient.FirstName = Prompt("Enter a new firstname.");
+                                          currentClient.FirstName = Prompt("Enter a new firstname. ");
                                     break;
                                 case "L": //[L]ast Name
-                                          currentClient.LastName = Prompt("Enter a new lastname.");
+                                          currentClient.LastName = Prompt("Enter a new lastname. ");
                                   
                                     break;
                                 case "W": //[W]eight 
                                           
-                                          currentClient.ClientWeight = int.Parse(Prompt("Enter a new weight in pounds."));
+                                          currentClient.ClientWeight = int.Parse(Prompt("Enter a new weight in pounds. "));
                                      
                                     break;
                                 case "H": //[H]eight
-                                          currentClient.ClientHeight = int.Parse(Prompt("Enter a new height in inches"));  
+                                          currentClient.ClientHeight = int.Parse(Prompt("Enter a new height in inches "));  
                                     break;
                                 case "R": //[R]eturn to MAIN MENU
                                     displayEditMenu = false;
                                     break;
                                 default: //invalid entry. Reprompt.
-                                    Console.WriteLine("Invalid reponse. Enter one of the letters to choose a submenu option.");
+                                    Console.WriteLine("Invalid reponse. Enter one of the letters to choose a submenu option. ");
                                     break;
                             }
                         }
