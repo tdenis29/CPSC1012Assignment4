@@ -1,21 +1,29 @@
 ﻿namespace CPSC1012Assignment4;
 using ClientClass;
-using System.Collections.Generic;
-// The program build will be developed in two parts:
-// Write a program to test your Client class as shown in the sample run below. The program must, at a minimum, demonstrate the following:
-//     a. prompt for a string
-//     b. prompt for an int
-//     c. create an instance of Client
-//     d. display the status or score, depending on user request, along with full client name
-//     e. have user friendly error handling (i.e. the program must not crash)
-// NOTE: the sample run does not demonstrate exception handling, ensure your program handles exceptions gracefully and does not crash.
+
+/*
+    Program: BMI Status 
+    Purpose: This program get a clients bmi status
+    Author: Tyson Denis
+    Last Modified: 2024-04-25
+*/
 class Program{
+//  / <summary>
+// / Displays the main menu options for managing clients.
+// / Options include: creating new clients, showing existing ones, editing client details, and quitting the program.
+// / </summary>
     static void DisplayMainMenu(){
         Console.WriteLine("[N]ew Client");
         Console.WriteLine("[S]how Client");
         Console.WriteLine("[E]dit Client");
         Console.WriteLine("[Q]uit Program");
 	}
+//  / <summary>
+// / Displays a disclaimer warning about overwriting unsaved data and prompts the user to confirm proceeding.
+// / Provides hints to edit data individually from the main menu and emphasizes the need to enter all client data.
+// / Returns true if the user chooses to proceed (by entering 'y'), otherwise returns false.
+// / </summary>
+// / <returns>True if the user chooses to proceed, otherwise false.</returns>
     static bool NewEntryDisclaimer(){
         bool response;
         Console.WriteLine("Disclaimer: proceeding will overwrite all unsaved data.");
@@ -26,6 +34,13 @@ class Program{
         Console.WriteLine();
         return response;
     }
+// / <summary>
+// / Prompts the user with a given message and validates the input string, ensuring it is not empty.
+// / If the input is empty, prompts the user to enter something and retries.
+// / Returns the trimmed user input string.
+// / </summary>
+// / <param name="prompt">The message to display as the prompt.</param>
+// / <returns>The trimmed user input string.</returns>
     static string Prompt(string prompt){
         string userString;
         bool invalidInput = false;
@@ -33,7 +48,7 @@ class Program{
         Console.Write(prompt);
         do{
         try{
-            userString = Console.ReadLine();
+            userString = Console.ReadLine().Trim();
             if(string.IsNullOrEmpty(userString)){
                 throw new FormatException("Please Enter something cannot be empty.");
             } else {
@@ -47,6 +62,10 @@ class Program{
          } while(!invalidInput);
          return userString;
 	}
+// / <summary>
+// / Displays the edit menu options for modifying client details.
+// / Options include: editing first name, last name, weight, height, or returning to the main menu.
+// / </summary>
     static void DisplayEditMenu(){
         Console.WriteLine("[F]irst Name");
         Console.WriteLine("[L]ast Name");
@@ -54,8 +73,12 @@ class Program{
         Console.WriteLine("[H]eight");
         Console.WriteLine("[R]eturn to MAIN MENU");
 	}
-    //change from void to INT at partb 
-
+  
+// / <summary>
+// / Prompts the user to enter details of a new client, including first name, last name, weight, and height.
+// / Validates user input for each field and instantiates a new Client object with the provided values.
+// / </summary>
+// / <returns>The newly created Client object.</returns>
      static Client EnterClient(//int[] sales, string[] dates
       ){
        
@@ -117,6 +140,12 @@ class Program{
        }
        return client1;   
         }
+// / <summary>
+// / Prompts the user to enter an integer within a specified range and validates the input.
+// / Validates that the input is an integer and falls within the specified range.
+// / Returns the validated integer input.
+// / </summary>
+// / <returns>The validated integer input.</returns>
 	static int Promptint(){
         int userint = 0;
         int min = 10;
@@ -143,6 +172,14 @@ class Program{
         return userint;
     } 
 
+
+
+// / <summary>
+// / Displays the BMI (Body Mass Index) information for a given client.
+// / Calculates the client's BMI score and retrieves the BMI status based on the score.
+// / Prints the client's name, BMI score, and BMI status.
+// / </summary>
+// / <param name="currentClient">
     static void DisplayBMIInfo(Client currentClient){
      
         double currentClientBMI = currentClient.BmiScore();
