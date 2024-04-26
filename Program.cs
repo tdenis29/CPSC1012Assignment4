@@ -115,23 +115,7 @@ class Program{
        if(client1 != null){
         Console.WriteLine("Client succesfully created.");
        }
-       return client1;
-
-    //     //add values into array here 
-    //     for(int i = 0; i <= 30; i++){
-    //         Console.WriteLine($"Please enter daily sales for day {i + 1} as a int value.");
-    //         dailySales = Promptint();
-    //         if(dailySales == -1){
-    //             break;
-    //         } else {
-    //             count++;
-    //         }
-    //     //ternary operator to handle 0 for days less than 10
-    //         monthlySaleString = i < 9 ? $"{month}-0{i + 1}-{userYear}" : $"{month}-{i + 1}-{userYear}";
-    //         dates[i] = monthlySaleString;
-    //         sales[i] = dailySales;
-    //     }
-    // return count;    
+       return client1;   
         }
 	static int Promptint(){
         int userint = 0;
@@ -178,7 +162,7 @@ class Program{
         bool proceed;
         bool quit;
         Client currentClient = null;
-        //REMEBER TO RE-IMPLEMENT COUNT
+        
         DisplayMainMenu();
 
          while (displayMainMenu)
@@ -187,7 +171,7 @@ class Program{
             Console.WriteLine();
     
 
-            //MAIN MENU Switch statement
+         
             switch (mainMenuChoice)
             {
                 case "N": //[N]ew Client Entry
@@ -240,28 +224,19 @@ class Program{
                             switch (editMenuChoice)
                             {
                                 case "F": //[F]irst Name
-                                          // TODO: uncomment the following and call Set FirstName
-                                          currentClient.FirstName = Prompt("Enter e new firstname.");
+                                          currentClient.FirstName = Prompt("Enter a new firstname.");
                                     break;
                                 case "L": //[L]ast Name
-                                          // TODO: uncomment the following and call the Largest method below
                                           currentClient.LastName = Prompt("Enter a new lastname.");
                                   
                                     break;
                                 case "W": //[W]eight 
-                                          // TODO: uncomment the following and call the Smallest method below
+                                          
                                           currentClient.ClientWeight = int.Parse(Prompt("Enter a new weight in pounds."));
-                                        //   smallest = LowestSales(sales, count);
-                                        //   month = dates[0].Substring(0, 3);
-                                        //   year = dates[0].Substring(7, 4);
-                                        //   Console.WriteLine($"The smallest sales for {month} {year} is: {smallest:C}");
-                                        //   Console.WriteLine();
+                                     
                                     break;
                                 case "H": //[H]eight
-                                          // TODO: call the DisplayChart method below
-                                          currentClient.ClientHeight = int.Parse(Prompt("Enter a new height in inches"));
-                                            // DisplaySalesChart(sales, dates, count);
-                                            // Prompt("Press <enter> to continue...");
+                                          currentClient.ClientHeight = int.Parse(Prompt("Enter a new height in inches"));  
                                     break;
                                 case "R": //[R]eturn to MAIN MENU
                                     displayEditMenu = false;
